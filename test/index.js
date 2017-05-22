@@ -76,4 +76,14 @@ describe('function literal runner', function(){
         done(err);
       });
   });
+  it('should pass through body', function(done){
+    request(server)
+      .post('/echotest')
+      .send({ name: 'Manny', species: 'cat' })
+      .expect(200)
+      .end((err, response) => {
+        assert.deepEqual(response.body.body, '{"name":"Manny","species":"cat"}');
+        done(err);
+      });
+  });
 });
