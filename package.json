@@ -19,5 +19,8 @@
   },
   "devDependencies": {
     "supertest": "^3.0.0"
+  },
+  "bin": {
+    "fliteral": "bin/fliteral"
   }
 }
