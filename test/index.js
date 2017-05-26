@@ -23,6 +23,12 @@ describe('function literal runner', function(){
       .expect(400)
       .end(err => done(err));
   });
+  it('should 400 on node_modules access', function(done){
+    request(server)
+      .get('/node_modules')
+      .expect(400)
+      .end(err => done(err));
+  });
   it('should not find anything at .', function(done){
     request(server)
       .get('/.')
