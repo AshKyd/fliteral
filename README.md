@@ -43,4 +43,7 @@ Variable name   | Description          | Default
 ----------------|----------------------|---------------------
 PORT            | HTTP port to open    | 8080
 LITERAL_PATH    | Path which contains function literals. | `path.join(__dirname, functions)`
-LITERAL_TIMEOUT | Number of milliseconds after which the server will send a 502 gateway timeout. | 15000               
+LITERAL_TIMEOUT | Number of milliseconds after which the server will send a 502 gateway timeout. | 15000
+LITERAL_LOGGLY_TOKEN     | Optional: Loggly token to remote log
+LITERAL_LOGGLY_SUBDOMAIN | Optional: Loggly subdomain to remote log
+LITERAL_LOGGLY_TAG       | Optional: Tag to log entries to loggly
