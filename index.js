@@ -1,15 +1,26 @@
 const fs = require('fs');
 const path  =require('path');
-const loggly  =require('loggly');
+const loggly = require('loggly');
 
 let logger;
-const logglyFilePath = path.join(__dirname, 'loggly.json');
-if(fs.existsSync(logglyFilePath)){
-  const logglyConf = require(logglyFilePath);
-  var client = loggly.createClient(logglyConf);
+
+const logglyConfig = {
+  token: process.env.LITERAL_LOGGLY_TOKEN,
+  subdomain: process.env.LITERAL_LOGGLY_SUBDOMAIN,
+  tags: [process.env.LITERAL_LOGGLY_TAG || 'fliteral'],
+  json: true,
+};
+
+if(logglyConfig.token && logglyConfig.subdomain){
+  var client = loggly.createClient(logglyConfig);
   logger = function(){
     client.log(...arguments);
-  }
+  };
+  logger({message: 'starting server'}, (error) => {
+    if(error) console.log(error);
+  });
+} else {
+  console.log('No loggly config provided. Skipping.');
 }
 
 const server = require('./lib/server')({
